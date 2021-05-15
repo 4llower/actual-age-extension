@@ -20,7 +20,7 @@
     "default_popup": "popup.html"
   },
   "chrome_url_overrides": {
-    "newtab": "index.html"
+    "newtab": "tab.html"
   },
   "permissions": [
     "storage"

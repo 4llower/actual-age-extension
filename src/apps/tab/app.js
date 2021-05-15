@@ -1,6 +1,6 @@
 'use strict';
 
-import './app.css';
+import './styles';
 
 (function() {
   function setTime() {

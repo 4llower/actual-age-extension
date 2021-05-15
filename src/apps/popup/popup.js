@@ -1,6 +1,6 @@
 'use strict';
 
-import './popup.css';
+import './styles';
 
 (function() {
   const counterStorage = {
