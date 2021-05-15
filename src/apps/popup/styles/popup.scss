@@ -1,0 +1,13 @@
+.content {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 20px;
+
+  .title {
+    text-align: center;
+  }
+}
