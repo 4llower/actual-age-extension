@@ -2,23 +2,19 @@
   "name": "actual-age-extension",
   "version": "1.0.0",
   "description": "My Chrome Extension",
-  "private": false,
+  "private": true,
   "scripts": {
     "start": "webpack --mode=development --watch --config config/webpack.config.js",
     "build": "webpack --mode=production --config config/webpack.config.js"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^6.4.1",
-    "css-loader": "^5.2.4",
+    "css-loader": "^4.3.0",
     "file-loader": "^6.2.0",
+    "mini-css-extract-plugin": "^0.10.1",
     "size-plugin": "^2.0.2",
     "webpack": "^4.46.0",
     "webpack-cli": "^3.3.12",
     "webpack-merge": "^5.7.3"
-  },
-  "dependencies": {
-    "sass": "^1.32.13",
-    "sass-loader": "^11.1.1",
-    "style-loader": "^2.0.0"
   }
 }
