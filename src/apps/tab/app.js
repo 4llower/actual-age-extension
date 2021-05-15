@@ -1,18 +1,16 @@
 'use strict';
 
-import getCurrentTime from './clock';
-import getDay from './day';
 import './app.css';
 
 (function() {
   function setTime() {
-    const time = getCurrentTime();
+    const time = "228";
 
     document.getElementById('clock').innerHTML = time;
   }
 
   function setDay() {
-    const day = getDay();
+    const day = "228";
 
     document.getElementById('day').innerHTML = day;
   }
