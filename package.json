@@ -2,6 +2,7 @@
   "name": "actual-age-extension",
   "version": "1.0.0",
   "description": "My Chrome Extension",
+  "license": "MIT",
   "private": true,
   "scripts": {
     "start": "webpack --mode=development --watch --config config/webpack.config.js",
@@ -16,5 +17,8 @@
     "webpack": "^4.46.0",
     "webpack-cli": "^3.3.12",
     "webpack-merge": "^5.7.3"
+  },
+  "dependencies": {
+    "prettier": "^2.3.0"
   }
 }
