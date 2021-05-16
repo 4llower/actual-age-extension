@@ -24,33 +24,31 @@ import moment from 'moment'
 
   const updateBirthdayDate = (date) =>
     actualAgeStorage.get('birthdayTime', (birthdayTime) => {
-      if (!birthdayTime) {
-        actualAgeStorage.set('birthday', date)
-      } else {
-        actualAgeStorage.set('birthday', date + birthdayTime)
-      }
+      actualAgeStorage.set('birthdayDate', date)
+      if (!birthdayTime) actualAgeStorage.set('birthday', date)
+      else actualAgeStorage.set('birthday', date + ' ' + birthdayTime)
     })
 
   const updateBirthdayTime = (time) =>
     actualAgeStorage.get('birthdayDate', (birthdayDate) => {
-      if (!birthdayDate) {
-        actualAgeStorage.set('birthday', time)
-      } else {
-        actualAgeStorage.set('birthday', birthdayDate + time)
-      }
+      actualAgeStorage.set('birthdayDate', time)
+      if (!birthdayDate) actualAgeStorage.set('birthday', time)
+      else actualAgeStorage.set('birthday', birthdayDate + ' ' + time)
     })
 
   function setupActualAge(initialValue) {
+    console.log(initialValue)
     const birthdayDate = document.getElementById('date')
     const birthdayTime = document.getElementById('time')
 
     if (initialValue) {
-      birthdayDate.value = moment(initialValue).format('MM/DD/YYYY')
+      console.log(moment(initialValue).format('YYYY-MM-DD'))
+      birthdayDate.value = moment(initialValue).format('yyyy-MM-dd')
       birthdayTime.value = moment(initialValue).format('HH:MM')
     }
 
     birthdayDate.addEventListener('change', (event) =>
-      updateBirthdayDate(event.target.value)
+      updateBirthdayDate(moment(event.target.value).format('yyyy-MM-dd'))
     )
     birthdayTime.addEventListener('change', (event) =>
       updateBirthdayTime(event.target.value)
