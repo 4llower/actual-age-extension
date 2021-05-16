@@ -25,7 +25,7 @@ const INVALID_DATE = 'Invalid date'
     },
   }
 
-  const updateBirthday = () =>
+  const updateBirthdayPostMessage = () =>
     storage.get('birthday', (birthday) =>
       chrome.runtime.sendMessage(
         {
@@ -56,7 +56,7 @@ const INVALID_DATE = 'Invalid date'
     const birthdayDate = document.getElementById('date')
     const birthdayTime = document.getElementById('time')
 
-    updateBirthday()
+    updateBirthdayPostMessage()
 
     if (initialValue) {
       if (moment(initialValue).format('YYYY-MM-DD') !== INVALID_DATE)
@@ -68,11 +68,11 @@ const INVALID_DATE = 'Invalid date'
 
     birthdayDate.addEventListener('change', (event) => {
       updateBirthdayDate(moment(event.target.value).format('YYYY-MM-DD'))
-      updateBirthday()
+      updateBirthdayPostMessage()
     })
     birthdayTime.addEventListener('change', (event) => {
       updateBirthdayTime(event.target.value)
-      updateBirthday()
+      updateBirthdayPostMessage()
     })
   }
 
