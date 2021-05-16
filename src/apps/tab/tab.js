@@ -63,10 +63,11 @@ const MINIMAL_EXTRA_VALUE = Math.pow(1 / 10, FIXED_POINT)
 
     let lastExtra
     let smoothExtra
+    let lastMain
 
     interval = setInterval(() => {
-      ageMain.innerText = getMain(birthday)
       const extra = getExtra(birthday)
+      const main = getMain(birthday)
       if (!lastExtra) {
         lastExtra = extra
         ageExtra.innerText = getExtra(birthday)
@@ -83,13 +84,16 @@ const MINIMAL_EXTRA_VALUE = Math.pow(1 / 10, FIXED_POINT)
           ageExtra.innerText = formatExtra(smoothExtra)
         }
       }
+      if (extra === formatExtra(0.0)) {
+        ageMain.innerText = main + 1
+      } else {
+        ageMain.innerText = main
+      }
     }, POLLING_TIMEOUT)
   }
 
   chrome.runtime.onMessage.addListener(({ type, payload }) => {
-    if (type === 'UPDATE_BIRTHDAY') {
-      setup(payload.birthday)
-    }
+    if (type === 'UPDATE_BIRTHDAY') setup(payload.birthday)
     return true
   })
 
