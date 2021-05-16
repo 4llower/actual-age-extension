@@ -105,16 +105,20 @@ const PHRASE_API_URL =
       loader.style.display = 'none'
     }
 
-    fetch(PHRASE_API_URL)
-      .then(async (r) => {
-        const { quotes } = await r.json()
-        hideLoader()
-        phrase.innerText = quotes.length ? quotes[0].text : DEFAULT_PHRASE
-      })
-      .catch(() => {
-        hideLoader()
-        phrase.innerText = DEFAULT_PHRASE
-      })
+    setTimeout(
+      () =>
+        fetch(PHRASE_API_URL)
+          .then(async (r) => {
+            const { quotes } = await r.json()
+            hideLoader()
+            phrase.innerText = quotes.length ? quotes[0].text : DEFAULT_PHRASE
+          })
+          .catch(() => {
+            hideLoader()
+            phrase.innerText = DEFAULT_PHRASE
+          }),
+      200
+    )
   }
 
   document.addEventListener('DOMContentLoaded', restoreActualAge)
