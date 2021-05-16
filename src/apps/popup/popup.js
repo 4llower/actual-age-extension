@@ -42,7 +42,7 @@ const PHRASE_API_URL =
       )
     )
 
-  const updateBirthdayDate = (date) =>
+  const updateBirthdayDate = (date) => {
     storage.get('birthdayTime', (birthdayTime) => {
       storage.set('birthdayDate', date)
       if (!birthdayTime)
@@ -54,8 +54,10 @@ const PHRASE_API_URL =
           updateBirthdayPostMessage
         )
     })
+  }
 
-  const updateBirthdayTime = (time) =>
+  const updateBirthdayTime = (time) => {
+    console.log(time)
     storage.get('birthdayDate', (birthdayDate) => {
       storage.set('birthdayTime', time)
       if (!birthdayDate)
@@ -67,6 +69,7 @@ const PHRASE_API_URL =
           updateBirthdayPostMessage
         )
     })
+  }
 
   function setupActualAge(initialValue) {
     const birthdayDate = document.getElementById('date')
@@ -75,8 +78,8 @@ const PHRASE_API_URL =
     if (initialValue) {
       if (moment(initialValue).format('YYYY-MM-DD') !== INVALID_DATE)
         birthdayDate.value = moment(initialValue).format('YYYY-MM-DD')
-      if (moment(initialValue).format('HH:MM') !== INVALID_DATE) {
-        birthdayTime.value = moment(initialValue).format('HH:MM')
+      if (moment(initialValue).format('HH:mm') !== INVALID_DATE) {
+        birthdayTime.value = moment(initialValue).format('HH:mm')
       }
     }
 
@@ -89,15 +92,7 @@ const PHRASE_API_URL =
   }
 
   function restoreActualAge() {
-    storage.get('birthday', (age) => {
-      if (typeof age === 'undefined') {
-        storage.set('birthday', 0, () => {
-          setupActualAge(0)
-        })
-      } else {
-        setupActualAge(age)
-      }
-    })
+    storage.get('birthday', setupActualAge)
     const phrase = document.getElementById('phrase')
     const loader = document.getElementById('loader')
 
