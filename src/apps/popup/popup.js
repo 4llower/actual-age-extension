@@ -2,18 +2,18 @@
 
 import './styles'
 import 'bootstrap/scss/bootstrap.scss'
-
+import moment from 'moment'
 ;(function () {
-  const counterStorage = {
-    get: (cb) => {
-      chrome.storage.sync.get(['count'], (result) => {
-        cb(result.count)
+  const actualAgeStorage = {
+    get: (name, cb) => {
+      chrome.storage.sync.get([name], (result) => {
+        cb(result[name])
       })
     },
-    set: (value, cb) => {
+    set: (name, value, cb) => {
       chrome.storage.sync.set(
         {
-          count: value,
+          [name]: value,
         },
         () => {
           cb()
@@ -22,85 +22,52 @@ import 'bootstrap/scss/bootstrap.scss'
     },
   }
 
-  function setupCounter(initialValue = 0) {
-    document.getElementById('counter').innerHTML = initialValue
-
-    document.getElementById('incrementBtn').addEventListener('click', () => {
-      updateCounter({
-        type: 'INCREMENT',
-      })
-    })
-
-    document.getElementById('decrementBtn').addEventListener('click', () => {
-      updateCounter({
-        type: 'DECREMENT',
-      })
-    })
-  }
-
-  function updateCounter({ type }) {
-    counterStorage.get((count) => {
-      let newCount
-
-      if (type === 'INCREMENT') {
-        newCount = count + 1
-      } else if (type === 'DECREMENT') {
-        newCount = count - 1
+  const updateBirthdayDate = (date) =>
+    actualAgeStorage.get('birthdayTime', (birthdayTime) => {
+      if (!birthdayTime) {
+        actualAgeStorage.set('birthday', date)
       } else {
-        newCount = count
-      }
-
-      counterStorage.set(newCount, () => {
-        document.getElementById('counter').innerHTML = newCount
-
-        // Communicate with content script of
-        // active tab by sending a message
-        chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-          const tab = tabs[0]
-
-          chrome.tabs.sendMessage(
-            tab.id,
-            {
-              type: 'COUNT',
-              payload: {
-                count: newCount,
-              },
-            },
-            (response) => {
-              console.log('Current count value passed to contentScript file')
-            }
-          )
-        })
-      })
-    })
-  }
-
-  function restoreCounter() {
-    // Restore count value
-    counterStorage.get((count) => {
-      if (typeof count === 'undefined') {
-        // Set counter value as 0
-        counterStorage.set(0, () => {
-          setupCounter(0)
-        })
-      } else {
-        setupCounter(count)
+        actualAgeStorage.set('birthday', date + birthdayTime)
       }
     })
-  }
 
-  document.addEventListener('DOMContentLoaded', restoreCounter)
+  const updateBirthdayTime = (time) =>
+    actualAgeStorage.get('birthdayDate', (birthdayDate) => {
+      if (!birthdayDate) {
+        actualAgeStorage.set('birthday', time)
+      } else {
+        actualAgeStorage.set('birthday', birthdayDate + time)
+      }
+    })
 
-  // Communicate with background file by sending a message
-  chrome.runtime.sendMessage(
-    {
-      type: 'GREETINGS',
-      payload: {
-        message: 'Hello, my name is Pop. I am from Popup.',
-      },
-    },
-    (response) => {
-      console.log(response.message)
+  function setupActualAge(initialValue) {
+    const birthdayDate = document.getElementById('date')
+    const birthdayTime = document.getElementById('time')
+
+    if (initialValue) {
+      birthdayDate.value = moment(initialValue).format('MM/DD/YYYY')
+      birthdayTime.value = moment(initialValue).format('HH:MM')
     }
-  )
+
+    birthdayDate.addEventListener('change', (event) =>
+      updateBirthdayDate(event.target.value)
+    )
+    birthdayTime.addEventListener('change', (event) =>
+      updateBirthdayTime(event.target.value)
+    )
+  }
+
+  function restoreActualAge() {
+    actualAgeStorage.get('birthday', (age) => {
+      if (typeof age === 'undefined') {
+        actualAgeStorage.set('birthday', 0, () => {
+          setupActualAge(0)
+        })
+      } else {
+        setupActualAge(age)
+      }
+    })
+  }
+
+  document.addEventListener('DOMContentLoaded', restoreActualAge)
 })()
