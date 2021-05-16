@@ -59,6 +59,12 @@ const MINIMAL_EXTRA_VALUE = Math.pow(1 / 10, FIXED_POINT)
     // loader.style.display = 'none'
     age.style.display = 'flex'
 
+    if (!birthday || !moment(birthday).isValid()) {
+      ageMain.innerText = 'Choose'
+      ageExtra.innerText = 'You Birth Date & Time'
+      return
+    }
+
     if (interval) clearInterval(interval)
 
     let lastExtra
