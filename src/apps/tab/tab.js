@@ -8,7 +8,7 @@ const FIXED_POINT = 8
 const MINIMAL_EXTRA_VALUE = Math.pow(1 / 10, FIXED_POINT)
 
 ;(function () {
-  const loader = document.getElementById('loader')
+  // const loader = document.getElementById('loader')
   const age = document.getElementById('age')
   const ageMain = document.getElementById('age__main')
   const ageExtra = document.getElementById('age__extra')
@@ -56,14 +56,13 @@ const MINIMAL_EXTRA_VALUE = Math.pow(1 / 10, FIXED_POINT)
 
   const setup = (birthday) => {
     isStarted = true
-    loader.style.display = 'none'
+    // loader.style.display = 'none'
     age.style.display = 'flex'
 
     if (interval) clearInterval(interval)
 
     let lastExtra
     let smoothExtra
-    let lastMain
 
     interval = setInterval(() => {
       const extra = getExtra(birthday)
@@ -84,11 +83,8 @@ const MINIMAL_EXTRA_VALUE = Math.pow(1 / 10, FIXED_POINT)
           ageExtra.innerText = formatExtra(smoothExtra)
         }
       }
-      if (extra === formatExtra(0.0)) {
-        ageMain.innerText = main + 1
-      } else {
-        ageMain.innerText = main
-      }
+      if (extra === formatExtra(0.0)) ageMain.innerText = main + 1
+      else ageMain.innerText = main
     }, POLLING_TIMEOUT)
   }
 
