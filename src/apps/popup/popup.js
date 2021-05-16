@@ -7,7 +7,7 @@ import moment from 'moment'
 const INVALID_DATE = 'Invalid date'
 
 ;(function () {
-  const actualAgeStorage = {
+  const storage = {
     get: (name, cb) => {
       chrome.storage.sync.get([name], (result) => {
         cb(result[name])
@@ -25,18 +25,31 @@ const INVALID_DATE = 'Invalid date'
     },
   }
 
+  const updateBirthday = () =>
+    storage.get('birthday', (birthday) =>
+      chrome.runtime.sendMessage(
+        {
+          type: 'UPDATE_BIRTHDAY',
+          payload: {
+            message: birthday,
+          },
+        },
+        () => {}
+      )
+    )
+
   const updateBirthdayDate = (date) =>
-    actualAgeStorage.get('birthdayTime', (birthdayTime) => {
-      actualAgeStorage.set('birthdayDate', date)
-      if (!birthdayTime) actualAgeStorage.set('birthday', date)
-      else actualAgeStorage.set('birthday', date + ' ' + birthdayTime)
+    storage.get('birthdayTime', (birthdayTime) => {
+      storage.set('birthdayDate', date)
+      if (!birthdayTime) storage.set('birthday', date)
+      else storage.set('birthday', date + ' ' + birthdayTime)
     })
 
   const updateBirthdayTime = (time) =>
-    actualAgeStorage.get('birthdayDate', (birthdayDate) => {
-      actualAgeStorage.set('birthdayTime', time)
-      if (!birthdayDate) actualAgeStorage.set('birthday', time)
-      else actualAgeStorage.set('birthday', birthdayDate + ' ' + time)
+    storage.get('birthdayDate', (birthdayDate) => {
+      storage.set('birthdayTime', time)
+      if (!birthdayDate) storage.set('birthday', time)
+      else storage.set('birthday', birthdayDate + ' ' + time)
     })
 
   function setupActualAge(initialValue) {
@@ -53,16 +66,18 @@ const INVALID_DATE = 'Invalid date'
 
     birthdayDate.addEventListener('change', (event) => {
       updateBirthdayDate(moment(event.target.value).format('YYYY-MM-DD'))
+      updateBirthday()
     })
     birthdayTime.addEventListener('change', (event) => {
       updateBirthdayTime(event.target.value)
+      updateBirthday()
     })
   }
 
   function restoreActualAge() {
-    actualAgeStorage.get('birthday', (age) => {
+    storage.get('birthday', (age) => {
       if (typeof age === 'undefined') {
-        actualAgeStorage.set('birthday', 0, () => {
+        storage.set('birthday', 0, () => {
           setupActualAge(0)
         })
       } else {
