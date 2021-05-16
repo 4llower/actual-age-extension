@@ -76,9 +76,7 @@ const MINIMAL_EXTRA_VALUE = Math.pow(1 / 10, FIXED_POINT)
           smoothExtra = undefined
           lastExtra = extra
         } else {
-          if (!smoothExtra) {
-            smoothExtra = parseFloat(lastExtra)
-          }
+          if (!smoothExtra) smoothExtra = parseFloat(lastExtra)
           smoothExtra += MINIMAL_EXTRA_VALUE
           ageExtra.innerText = formatExtra(smoothExtra)
         }

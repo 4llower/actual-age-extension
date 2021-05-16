@@ -3,8 +3,12 @@
 import './styles'
 import 'bootstrap/scss/bootstrap.scss'
 import moment from 'moment'
+import '../common'
 
 const INVALID_DATE = 'Invalid date'
+const DEFAULT_PHRASE = 'Age...is a matter of feeling, not of years.'
+const PHRASE_API_URL =
+  'https://goquotes-api.herokuapp.com/api/v1/random/1?type=tag&val=motivational'
 
 ;(function () {
   const storage = {
@@ -94,6 +98,23 @@ const INVALID_DATE = 'Invalid date'
         setupActualAge(age)
       }
     })
+    const phrase = document.getElementById('phrase')
+    const loader = document.getElementById('loader')
+
+    const hideLoader = () => {
+      loader.style.display = 'none'
+    }
+
+    fetch(PHRASE_API_URL)
+      .then(async (r) => {
+        const { quotes } = await r.json()
+        hideLoader()
+        phrase.innerText = quotes.length ? quotes[0].text : DEFAULT_PHRASE
+      })
+      .catch(() => {
+        hideLoader()
+        phrase.innerText = DEFAULT_PHRASE
+      })
   }
 
   document.addEventListener('DOMContentLoaded', restoreActualAge)

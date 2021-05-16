@@ -16,5 +16,5 @@ html,
 
 body {
   width: 350px;
-  height: 300px;
+  height: max-content;
 }

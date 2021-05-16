@@ -10,11 +10,18 @@
   }
 
   .birthday {
+    margin-top: 30px;
     .birthday__time {
       width: 100%;
     }
     .birthday__date {
       width: 100%;
     }
+  }
+
+  .phrase {
+    margin-top: 40px;
+    font-size: 16px;
+    color: gray;
   }
 }
