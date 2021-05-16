@@ -3,8 +3,8 @@
 import './styles'
 import moment from 'moment'
 
-const POLLING_TIMEOUT = 333
-const FIXED_POINT = 8
+const POLLING_TIMEOUT = 32
+const FIXED_POINT = 9
 const MINIMAL_EXTRA_VALUE = Math.pow(1 / 10, FIXED_POINT)
 
 ;(function () {
