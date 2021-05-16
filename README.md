@@ -5,17 +5,17 @@ Displaying actual age in percentage with 9 signs after dot (floating number)
 ## Features
 
 ### Popup
-You can select your Birth date & time. Finite number will be reckoned from date what you choosed
-<img src="docs/images/popup.png" width="300">
+*You can select your Birth date & time. Finite number will be reckoned from date what you chosen*
+<img src="docs/images/popup.png" width="500" style="display: block; margin-top: 20px;">
 
 ### New tab override
-Core component which display your actual age
-<img src="docs/images/tab.png" width="300">
+*Core component which display your actual age*
+<img src="docs/images/tab.png" width="500" style="display: block; margin-top: 20px;">
 ### Phrases
-Popup display random motivational phrase
-<img src="docs/images/phrase.png" width="300">
-<img src="docs/images/phrase1.png" width="300">
-<img src="docs/images/phrase2.png" width="300">
+*Popup display random motivational phrase*
+<img src="docs/images/phrase.png" width="500" style="display: block; margin-top: 20px;">
+<img src="docs/images/phrase1.png" width="500" style="display: block; margin-top: 20px;">
+<img src="docs/images/phrase2.png" width="500" style="display: block; margin-top: 20px;">
 ## Install
 
 [**Chrome** extension]() <!-- TODO: Add chrome extension link inside parenthesis -->
