@@ -1,21 +1,21 @@
-# <img src="public/icons/icon_48.png" width="45" align="left"> Actual Age Extension
+# <img src="docs/images/icon.png" width="45" align="left"> Actual Age Chrome Extension
 
-My Chrome Extension
+Displaying actual age in percentage with 9 signs after dot (floating number)
 
 ## Features
 
-- Feature 1
-- Feature 2
+### Popup
+You can select your Birth date & time. Finite number will be reckoned from date what you choosed
+<img src="docs/images/popup.png" width="300">
 
+### New tab override
+Core component which display your actual age
+<img src="docs/images/tab.png" width="300">
+### Phrases
+Popup display random motivational phrase
+<img src="docs/images/phrase.png" width="300">
+<img src="docs/images/phrase1.png" width="300">
+<img src="docs/images/phrase2.png" width="300">
 ## Install
 
 [**Chrome** extension]() <!-- TODO: Add chrome extension link inside parenthesis -->
-
-## Contribution
-
-Suggestions and pull requests are welcomed!.
-
----
-
-This project was bootstrapped with [Chrome Extension CLI](https://github.com/dutiyesh/chrome-extension-cli)
-

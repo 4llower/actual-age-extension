@@ -1,12 +1,12 @@
 {
   "manifest_version": 2,
-  "name": "My Extension",
-  "version": "0.1.0",
-  "description": "My Chrome Extension",
+  "name": "Actual Age Tab",
+  "version": "1.0.0",
+  "description": "Displaying actual age in percentage with 9 signs after dot (floating number)",
   "icons": {
-    "16": "icons/icon_16.png",
-    "32": "icons/icon_32.png",
-    "48": "icons/icon_48.png",
+    "16": "icons/icon_128.png",
+    "32": "icons/icon_128.png",
+    "48": "icons/icon_128.png",
     "128": "icons/icon_128.png"
   },
   "background": {
