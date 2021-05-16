@@ -6,7 +6,7 @@ Displaying actual age in percentage with 9 signs after dot (floating number)
 
 ### Popup
 *You can select your Birth date & time. Finite number will be reckoned from date what you chosen*
-<img src="docs/images/popup.png" width="500" style="display: block; margin-top: 20px; width: 100%;">
+<img src="docs/images/popup.png" style="display: block; margin-top: 20px; width: 100%;">
 
 ### New tab override
 *Core component which display your actual age*
@@ -14,9 +14,9 @@ Displaying actual age in percentage with 9 signs after dot (floating number)
 
 ### Phrases
 *Popup display random motivational phrase*
-<img src="docs/images/phrase.png" width="500" style="display: block; margin-top: 20px; width: 100%;">
-<img src="docs/images/phrase1.png" width="500" style="display: block; margin-top: 20px; width: 100%;">
-<img src="docs/images/phrase2.png" width="500" style="display: block; margin-top: 20px; width: 100%;">
+<img src="docs/images/phrase.png" style="display: block; margin-top: 20px; width: 100%;">
+<img src="docs/images/phrase1.png" style="display: block; margin-top: 20px; width: 100%;">
+<img src="docs/images/phrase2.png" style="display: block; margin-top: 20px; width: 100%;">
 
 ## Install
 
