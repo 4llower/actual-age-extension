@@ -1,38 +1,31 @@
-'use strict';
+'use strict'
 
-import './styles';
-
-(function() {
-  function setTime() {
-    const time = "228";
-
-    document.getElementById('clock').innerHTML = time;
-  }
-
-  function setDay() {
-    const day = "228";
-
-    document.getElementById('day').innerHTML = day;
-  }
-
-  function setupDashboard() {
-    setDay();
-    setTime();
-    setInterval(setTime, 1000);
-  }
-
-  setupDashboard();
-
-  // Communicate with background file by sending a message
-  chrome.runtime.sendMessage(
-    {
-      type: 'GREETINGS',
-      payload: {
-        message: 'Hello, my name is Ove. I am from Override app.',
-      },
+import './styles'
+;(function () {
+  const storage = {
+    get: (name, cb) => {
+      chrome.storage.sync.get([name], (result) => {
+        cb(result[name])
+      })
     },
-    response => {
-      console.log(response.message);
+    set: (name, value, cb) => {
+      chrome.storage.sync.set(
+        {
+          [name]: value,
+        },
+        () => {
+          if (cb) cb()
+        }
+      )
+    },
+  }
+
+  chrome.runtime.onMessage.addListener(({ type, payload }) => {
+    if (type === 'UPDATE_BIRTHDAY') {
+      console.log(payload)
     }
-  );
-})();
+    return true
+  })
+
+  storage.get('birthday', console.log)
+})()

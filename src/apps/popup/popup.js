@@ -31,7 +31,7 @@ const INVALID_DATE = 'Invalid date'
         {
           type: 'UPDATE_BIRTHDAY',
           payload: {
-            message: birthday,
+            birthday,
           },
         },
         () => {}
@@ -41,22 +41,32 @@ const INVALID_DATE = 'Invalid date'
   const updateBirthdayDate = (date) =>
     storage.get('birthdayTime', (birthdayTime) => {
       storage.set('birthdayDate', date)
-      if (!birthdayTime) storage.set('birthday', date)
-      else storage.set('birthday', date + ' ' + birthdayTime)
+      if (!birthdayTime)
+        storage.set('birthday', date, updateBirthdayPostMessage)
+      else
+        storage.set(
+          'birthday',
+          date + ' ' + birthdayTime,
+          updateBirthdayPostMessage
+        )
     })
 
   const updateBirthdayTime = (time) =>
     storage.get('birthdayDate', (birthdayDate) => {
       storage.set('birthdayTime', time)
-      if (!birthdayDate) storage.set('birthday', time)
-      else storage.set('birthday', birthdayDate + ' ' + time)
+      if (!birthdayDate)
+        storage.set('birthday', time, updateBirthdayPostMessage)
+      else
+        storage.set(
+          'birthday',
+          birthdayDate + ' ' + time,
+          updateBirthdayPostMessage
+        )
     })
 
   function setupActualAge(initialValue) {
     const birthdayDate = document.getElementById('date')
     const birthdayTime = document.getElementById('time')
-
-    updateBirthdayPostMessage()
 
     if (initialValue) {
       if (moment(initialValue).format('YYYY-MM-DD') !== INVALID_DATE)
@@ -68,11 +78,9 @@ const INVALID_DATE = 'Invalid date'
 
     birthdayDate.addEventListener('change', (event) => {
       updateBirthdayDate(moment(event.target.value).format('YYYY-MM-DD'))
-      updateBirthdayPostMessage()
     })
     birthdayTime.addEventListener('change', (event) => {
       updateBirthdayTime(event.target.value)
-      updateBirthdayPostMessage()
     })
   }
 
