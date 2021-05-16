@@ -56,6 +56,8 @@ const INVALID_DATE = 'Invalid date'
     const birthdayDate = document.getElementById('date')
     const birthdayTime = document.getElementById('time')
 
+    updateBirthday()
+
     if (initialValue) {
       if (moment(initialValue).format('YYYY-MM-DD') !== INVALID_DATE)
         birthdayDate.value = moment(initialValue).format('YYYY-MM-DD')
