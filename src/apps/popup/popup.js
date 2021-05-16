@@ -3,6 +3,9 @@
 import './styles'
 import 'bootstrap/scss/bootstrap.scss'
 import moment from 'moment'
+
+const INVALID_DATE = 'Invalid date'
+
 ;(function () {
   const actualAgeStorage = {
     get: (name, cb) => {
@@ -16,7 +19,7 @@ import moment from 'moment'
           [name]: value,
         },
         () => {
-          cb()
+          if (cb) cb()
         }
       )
     },
@@ -31,28 +34,29 @@ import moment from 'moment'
 
   const updateBirthdayTime = (time) =>
     actualAgeStorage.get('birthdayDate', (birthdayDate) => {
-      actualAgeStorage.set('birthdayDate', time)
+      actualAgeStorage.set('birthdayTime', time)
       if (!birthdayDate) actualAgeStorage.set('birthday', time)
       else actualAgeStorage.set('birthday', birthdayDate + ' ' + time)
     })
 
   function setupActualAge(initialValue) {
-    console.log(initialValue)
     const birthdayDate = document.getElementById('date')
     const birthdayTime = document.getElementById('time')
 
     if (initialValue) {
-      console.log(moment(initialValue).format('YYYY-MM-DD'))
-      birthdayDate.value = moment(initialValue).format('yyyy-MM-dd')
-      birthdayTime.value = moment(initialValue).format('HH:MM')
+      if (moment(initialValue).format('YYYY-MM-DD') !== INVALID_DATE)
+        birthdayDate.value = moment(initialValue).format('YYYY-MM-DD')
+      if (moment(initialValue).format('HH:MM') !== INVALID_DATE) {
+        birthdayTime.value = moment(initialValue).format('HH:MM')
+      }
     }
 
-    birthdayDate.addEventListener('change', (event) =>
-      updateBirthdayDate(moment(event.target.value).format('yyyy-MM-dd'))
-    )
-    birthdayTime.addEventListener('change', (event) =>
+    birthdayDate.addEventListener('change', (event) => {
+      updateBirthdayDate(moment(event.target.value).format('YYYY-MM-DD'))
+    })
+    birthdayTime.addEventListener('change', (event) => {
       updateBirthdayTime(event.target.value)
-    )
+    })
   }
 
   function restoreActualAge() {
