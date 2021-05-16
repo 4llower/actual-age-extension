@@ -5,6 +5,11 @@
 .idea
 .vscode
 
+build.crx
+build.pem
+actual-age.zip
+size-plugin.json
+
 # production
 /build
 
