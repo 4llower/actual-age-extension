@@ -27,4 +27,4 @@ Displaying actual age in percentage with 9 signs after dot (floating number)
 
 ## Install
 
-[**Chrome** extension]() <!-- TODO: Add chrome extension link inside parenthesis -->
+[**Chrome** extension](https://chrome.google.com/webstore/detail/actual-age-tab/ocapfmbpidoohpnacpcokoiahaofljia)
