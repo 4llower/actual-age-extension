@@ -2,6 +2,8 @@
 
 import './styles'
 import 'bootstrap/scss/bootstrap.scss'
+import * as SimpleSwitch from 'a-simple-switch'
+import 'a-simple-switch/src/sass/SimpleSwitch.scss'
 import moment from 'moment'
 import '../common'
 
@@ -57,7 +59,6 @@ const PHRASE_API_URL =
   }
 
   const updateBirthdayTime = (time) => {
-    console.log(time)
     storage.get('birthdayDate', (birthdayDate) => {
       storage.set('birthdayTime', time)
       if (!birthdayDate)
@@ -95,6 +96,7 @@ const PHRASE_API_URL =
     storage.get('birthday', setupActualAge)
     const phrase = document.getElementById('phrase')
     const loader = document.getElementById('loader')
+    SimpleSwitch.init()
 
     const hideLoader = () => {
       loader.style.display = 'none'

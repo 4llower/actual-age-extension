@@ -191,6 +191,11 @@
   resolved "https://registry.yarnpkg.com/@xtuc/long/-/long-4.2.2.tgz#d291c6a4e97989b5c61d9acf396ae4fe133a718d"
   integrity sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==
 
+a-simple-switch@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/a-simple-switch/-/a-simple-switch-0.6.0.tgz#51abcd8eeefc034f0b6d33d0a0db0a4b9c6720ce"
+  integrity sha512-jiIWj76eGo/JYEQMVTfEEF56klEayhfhmrYz8iC7QXOq4FJZKmBjPRmewaxOTe5CBHyKMcicVEcRQDNwRQhnQA==
+
 acorn@^6.4.1:
   version "6.4.2"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-6.4.2.tgz#35866fd710528e92de10cf06016498e47e39e1e6"

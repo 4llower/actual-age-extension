@@ -1,6 +1,6 @@
 {
   "name": "actual-age-extension",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "My Chrome Extension",
   "license": "MIT",
   "private": true,
@@ -17,6 +17,7 @@
     "webpack-merge": "^5.7.3"
   },
   "dependencies": {
+    "a-simple-switch": "^0.6.0",
     "bootstrap": "^5.0.1",
     "css-loader": "^5.2.4",
     "moment": "^2.29.1",

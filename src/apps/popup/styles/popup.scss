@@ -20,8 +20,28 @@
   }
 
   .phrase {
-    margin-top: 40px;
     font-size: 16px;
     color: gray;
+  }
+
+  .theme {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    .hidden {
+      opacity: 0.5;
+    }
+    .theme-dark {
+      font-weight: 600;
+      margin-right: 10px;
+    }
+    ._simple-switch-track {
+      width: 40px;
+      height: 20px;
+    }
+    .theme-light {
+      font-weight: 600;
+      margin-left: 10px;
+    }
   }
 }
