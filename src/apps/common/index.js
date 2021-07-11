@@ -1,2 +1,2 @@
-import './heart.scss'
-import './global.scss'
+export * from './styles'
+export * from './utils'

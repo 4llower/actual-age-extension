@@ -2,41 +2,22 @@
 
 import './styles'
 import moment from 'moment'
+import { storage } from '../common'
+import '../common/styles'
+import { config } from './config'
 
-const POLLING_TIMEOUT = 32
-const FIXED_POINT = 9
-const MINIMAL_EXTRA_VALUE = Math.pow(1 / 10, FIXED_POINT)
-
-;(function () {
+export const setupTab = () => {
   // const loader = document.getElementById('loader')
   const age = document.getElementById('age')
   const ageMain = document.getElementById('age__main')
   const ageExtra = document.getElementById('age__extra')
-
-  const storage = {
-    get: (name, cb) => {
-      chrome.storage.sync.get([name], (result) => {
-        cb(result[name])
-      })
-    },
-    set: (name, value, cb) => {
-      chrome.storage.sync.set(
-        {
-          [name]: value,
-        },
-        () => {
-          if (cb) cb()
-        }
-      )
-    },
-  }
 
   const getMain = (birthday) => {
     const date = moment(birthday)
     return moment().diff(date, 'years')
   }
 
-  const formatExtra = (extra) => extra.toFixed(FIXED_POINT).slice(1)
+  const formatExtra = (extra) => extra.toFixed(config.FIXED_POINT).slice(1)
 
   const getExtra = (birthday) => {
     const main = getMain(birthday)
@@ -83,13 +64,13 @@ const MINIMAL_EXTRA_VALUE = Math.pow(1 / 10, FIXED_POINT)
           lastExtra = extra
         } else {
           if (!smoothExtra) smoothExtra = parseFloat(lastExtra)
-          smoothExtra += MINIMAL_EXTRA_VALUE
+          smoothExtra += config.MINIMAL_EXTRA_VALUE
           ageExtra.innerText = formatExtra(smoothExtra)
         }
       }
       if (extra === formatExtra(0.0)) ageMain.innerText = main + 1
       else ageMain.innerText = main
-    }, POLLING_TIMEOUT)
+    }, config.POLLING_TIMEOUT)
   }
 
   chrome.runtime.onMessage.addListener(({ type, payload }) => {
@@ -100,4 +81,6 @@ const MINIMAL_EXTRA_VALUE = Math.pow(1 / 10, FIXED_POINT)
   storage.get('birthday', (birthday) => {
     if (!isStarted) setup(birthday)
   })
-})()
+}
+
+setupTab()

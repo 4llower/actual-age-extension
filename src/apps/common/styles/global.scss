@@ -10,6 +10,13 @@
 
 html,
 * {
-  font-family: 'Montserrat', sans-serif;
+  font-family: inherit;
+  color: inherit;
+  background: inherit;
+}
+
+body {
   color: #222;
+  background: #f8f8ff;
+  font-family: 'Montserrat', sans-serif;
 }
