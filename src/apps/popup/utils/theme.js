@@ -1,18 +1,6 @@
-export const changeTheme = (newTheme) => {
-  switch (newTheme) {
-    case 'dark': {
-      break
-    }
-    case 'light': {
-      break
-    }
-    default: {
-      break
-    }
-  }
-}
+import { storage } from '../../common'
 
-const updateThemePostMessage = () => {
+export const updateThemePostMessage = () => {
   storage.get('theme', (theme) => {
     chrome.runtime.sendMessage(
       {

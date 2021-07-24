@@ -2,15 +2,20 @@
 
 import './styles'
 import moment from 'moment'
-import { storage } from '../common'
+import { changeTheme, storage } from '../common'
 import '../common/styles'
 import { config } from './config'
 
 export const setupTab = () => {
-  // const loader = document.getElementById('loader')
   const age = document.getElementById('age')
   const ageMain = document.getElementById('age__main')
   const ageExtra = document.getElementById('age__extra')
+  // const loader = document.getElementById('loader')
+
+  storage.get('theme', (theme) => {
+    console.log(theme)
+    changeTheme(theme)
+  })
 
   const getMain = (birthday) => {
     const date = moment(birthday)
@@ -37,8 +42,9 @@ export const setupTab = () => {
 
   const setup = (birthday) => {
     isStarted = true
-    // loader.style.display = 'none'
     age.style.display = 'flex'
+
+    // loader.style.display = 'none'
 
     if (!birthday || !moment(birthday).isValid()) {
       ageMain.innerText = 'Choose'
@@ -74,11 +80,13 @@ export const setupTab = () => {
   }
 
   chrome.runtime.onMessage.addListener(({ type, payload }) => {
+    console.log(228)
     if (type === 'UPDATE_BIRTHDAY') setup(payload.birthday)
     return true
   })
 
   storage.get('birthday', (birthday) => {
+    console.log(228)
     if (!isStarted) setup(birthday)
   })
 }

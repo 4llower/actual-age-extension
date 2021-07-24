@@ -7,11 +7,53 @@ import 'a-simple-switch/src/sass/SimpleSwitch.scss'
 import moment from 'moment'
 import '../common/styles'
 import { config } from './config'
-import { storage } from '../common'
-import { updateBirthdayDate, updateBirthdayTime } from './utils'
+import { storage, changeTheme } from '../common'
+import { updateThemePostMessage } from './utils'
 
 export const setupPopup = () => {
-  function setupActualAge(initialValue) {
+  const updateBirthdayPostMessage = () => {
+    storage.get('birthday', (birthday) => {
+      chrome.runtime.sendMessage(
+        {
+          type: 'UPDATE_BIRTHDAY',
+          payload: {
+            birthday,
+          },
+        },
+        () => {}
+      )
+    })
+  }
+
+  const updateBirthdayDate = (date) => {
+    storage.get('birthdayTime', (birthdayTime) => {
+      storage.set('birthdayDate', date)
+      if (!birthdayTime)
+        storage.set('birthday', date, updateBirthdayPostMessage)
+      else
+        storage.set(
+          'birthday',
+          date + ' ' + birthdayTime,
+          updateBirthdayPostMessage
+        )
+    })
+  }
+
+  const updateBirthdayTime = (time) => {
+    storage.get('birthdayDate', (birthdayDate) => {
+      storage.set('birthdayTime', time)
+      if (!birthdayDate)
+        storage.set('birthday', time, updateBirthdayPostMessage)
+      else
+        storage.set(
+          'birthday',
+          birthdayDate + ' ' + time,
+          updateBirthdayPostMessage
+        )
+    })
+  }
+
+  const setupActualAge = (initialValue) => {
     const birthdayDate = document.getElementById('date')
     const birthdayTime = document.getElementById('time')
 
@@ -31,16 +73,27 @@ export const setupPopup = () => {
     })
   }
 
-  function restoreActualAge() {
+  const restoreActualAge = () => {
     storage.get('birthday', setupActualAge)
     SimpleSwitch.init()
-    const phrase = document.getElementById('phrase')
-    const loader = document.getElementById('loader')
+
+    // const phrase = document.getElementById('phrase')
+    // const loader = document.getElementById('loader')
     const dark = document.getElementById('dark')
     const light = document.getElementById('light')
     const switcher = document.getElementById('theme-switch')
+    const shadowSwitcher = document.getElementsByClassName(
+      '_simple-switch-track'
+    )[0]
 
-    let currentTheme = 'dark'
+    let currentTheme = 'light'
+
+    storage.get('theme', (theme) => {
+      changeTheme(theme)
+      currentTheme = theme
+      switcher.checked = theme === 'light'
+      if (theme === 'light') shadowSwitcher.classList.add('on')
+    })
 
     switcher.addEventListener('change', (event) => {
       if (event.target.checked) {
@@ -52,29 +105,31 @@ export const setupPopup = () => {
         dark.classList.remove('hidden')
         light.classList.add('hidden')
       }
+      changeTheme(currentTheme)
       storage.set('theme', currentTheme)
+      updateThemePostMessage()
     })
 
-    const hideLoader = () => {
-      loader.style.display = 'none'
-    }
+    // const hideLoader = () => {
+    //   loader.style.display = 'none'
+    // }
 
-    setTimeout(
-      () =>
-        fetch(config.PHRASE_API_URL)
-          .then(async (r) => {
-            const { quotes } = await r.json()
-            hideLoader()
-            phrase.innerText = quotes.length
-              ? quotes[0].text
-              : config.DEFAULT_PHRASE
-          })
-          .catch(() => {
-            hideLoader()
-            phrase.innerText = config.DEFAULT_PHRASE
-          }),
-      200
-    )
+    // setTimeout(
+    //   () =>
+    //     fetch(config.PHRASE_API_URL)
+    //       .then(async (r) => {
+    //         const { quotes } = await r.json()
+    //         hideLoader()
+    //         phrase.innerText = quotes.length
+    //           ? quotes[0].text
+    //           : config.DEFAULT_PHRASE
+    //       })
+    //       .catch(() => {
+    //         hideLoader()
+    //         phrase.innerText = config.DEFAULT_PHRASE
+    //       }),
+    //   200
+    // )
   }
 
   document.addEventListener('DOMContentLoaded', restoreActualAge)
