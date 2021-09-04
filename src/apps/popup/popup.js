@@ -69,6 +69,7 @@ export const setupPopup = () => {
     birthdayDate.addEventListener("change", (event) => {
       updateBirthdayDate(moment(event.target.value).format("YYYY-MM-DD"));
     });
+
     birthdayTime.addEventListener("change", (event) => {
       updateBirthdayTime(event.target.value);
     });
@@ -76,10 +77,9 @@ export const setupPopup = () => {
 
   const restoreActualAge = () => {
     storage.get("birthday", setupActualAge);
+
     SimpleSwitch.init();
 
-    // const phrase = document.getElementById('phrase')
-    // const loader = document.getElementById('loader')
     const dark = document.getElementById("dark");
     const light = document.getElementById("light");
     const switcher = document.getElementById("theme-switch");
@@ -110,27 +110,6 @@ export const setupPopup = () => {
       storage.set("theme", currentTheme);
       updateThemePostMessage();
     });
-
-    // const hideLoader = () => {
-    //   loader.style.display = 'none'
-    // }
-
-    // setTimeout(
-    //   () =>
-    //     fetch(config.PHRASE_API_URL)
-    //       .then(async (r) => {
-    //         const { quotes } = await r.json()
-    //         hideLoader()
-    //         phrase.innerText = quotes.length
-    //           ? quotes[0].text
-    //           : config.DEFAULT_PHRASE
-    //       })
-    //       .catch(() => {
-    //         hideLoader()
-    //         phrase.innerText = config.DEFAULT_PHRASE
-    //       }),
-    //   200
-    // )
   };
 
   document.addEventListener("DOMContentLoaded", restoreActualAge);

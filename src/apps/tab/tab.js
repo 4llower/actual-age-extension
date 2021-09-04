@@ -14,7 +14,6 @@ export const setupTab = () => {
   const ageExtra = document.getElementById("age__extra");
 
   storage.get("theme", (theme) => {
-    console.log(theme);
     changeTheme(theme);
   });
 
@@ -79,8 +78,16 @@ export const setupTab = () => {
   };
 
   chrome.runtime.onMessage.addListener(({ type, payload }) => {
-    if (type === "UPDATE_BIRTHDAY") setup(payload.birthday);
-    return true;
+    switch (type) {
+      case "UPDATE_BIRTHDAY": {
+        setup(payload.birthday);
+        break;
+      }
+      case "UPDATE_THEME": {
+        changeTheme(payload.theme);
+        break;
+      }
+    }
   });
 
   storage.get("birthday", (birthday) => {
