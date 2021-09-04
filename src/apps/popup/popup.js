@@ -1,14 +1,15 @@
-"use strict";
+import * as SimpleSwitch from "a-simple-switch";
 
+import { config } from "./config";
+import moment from "moment";
+import { updateThemePostMessage } from "./utils";
+
+import { changeTheme, storage } from "../common";
+
+import "a-simple-switch/src/sass/SimpleSwitch.scss";
 import "./styles";
 import "bootstrap/scss/bootstrap.scss";
-import * as SimpleSwitch from "a-simple-switch";
-import "a-simple-switch/src/sass/SimpleSwitch.scss";
-import moment from "moment";
 import "../common/styles";
-import { config } from "./config";
-import { storage, changeTheme } from "../common";
-import { updateThemePostMessage } from "./utils";
 
 export const setupPopup = () => {
   const updateBirthdayPostMessage = () => {

@@ -16,5 +16,9 @@ module.exports = {
         endOfLine: "auto",
       },
     ],
+    "sort-imports": [
+      "error",
+      { memberSyntaxSortOrder: ["all", "single", "multiple", "none"] },
+    ],
   },
 };

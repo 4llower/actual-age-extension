@@ -1,14 +1,16 @@
-"use strict";
+import * as moment from "moment";
+
+import { config } from "./config";
+
+import { changeTheme, storage } from "../common";
 
 import "./styles";
-import moment from "moment";
-import { changeTheme, storage } from "../common";
 import "../common/styles";
-import { config } from "./config";
 
 export const setupTab = () => {
   const age = document.getElementById("age");
   const ageMain = document.getElementById("age__main");
+
   const ageExtra = document.getElementById("age__extra");
 
   storage.get("theme", (theme) => {
