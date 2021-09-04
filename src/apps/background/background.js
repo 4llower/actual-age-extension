@@ -1,5 +1,3 @@
-'use strict';
+"use strict";
 
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-
-});
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {});

@@ -1,1 +1,1 @@
-import './tab.scss'
+import "./tab.scss";

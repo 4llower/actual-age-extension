@@ -1,1 +1,1 @@
-import './popup.scss'
+import "./popup.scss";

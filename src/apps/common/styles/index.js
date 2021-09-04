@@ -1,2 +1,2 @@
-import './heart.scss'
-import './global.scss'
+import "./heart.scss";
+import "./global.scss";
