@@ -8,6 +8,7 @@
   .age {
     display: none;
     align-items: flex-start;
+    user-select: none;
     .age__main {
       font-size: 60px;
       line-height: 1;
@@ -15,7 +16,7 @@
     .age__extra {
       font-size: 30px;
       width: max-content;
-      width: 180px;
+      min-width: 180px;
       margin-top: -8px;
     }
   }

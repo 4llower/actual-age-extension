@@ -44,9 +44,18 @@ export const setupTab = () => {
     isStarted = true;
     age.style.display = "flex";
 
-    if (!birthday || !moment(birthday).isValid()) {
+    if (!birthday) {
       ageMain.innerText = "Choose";
       ageExtra.innerText = "You Birth Date & Time";
+      return;
+    }
+
+    if (
+      !moment(birthday).isValid() ||
+      new Date(birthday).getTime() > Date.now()
+    ) {
+      ageMain.innerText = "Choose";
+      ageExtra.innerText = "Correct Birth Date Please :P";
       return;
     }
 

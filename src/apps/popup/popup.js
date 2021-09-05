@@ -92,19 +92,23 @@ export const setupPopup = () => {
     storage.get("theme", (theme) => {
       changeTheme(theme);
       currentTheme = theme;
-      switcher.checked = theme === "light";
-      if (theme === "light") shadowSwitcher.classList.add("on");
+      if (theme === "dark") {
+        switcher.checked = true;
+        light.classList.add("hidden");
+        dark.classList.remove("hidden");
+        shadowSwitcher.classList.add("on");
+      }
     });
 
     switcher.addEventListener("change", (event) => {
       if (event.target.checked) {
-        currentTheme = "light";
-        light.classList.remove("hidden");
-        dark.classList.add("hidden");
-      } else {
         currentTheme = "dark";
-        dark.classList.remove("hidden");
         light.classList.add("hidden");
+        dark.classList.remove("hidden");
+      } else {
+        currentTheme = "light";
+        dark.classList.add("hidden");
+        light.classList.remove("hidden");
       }
       changeTheme(currentTheme);
       storage.set("theme", currentTheme);
