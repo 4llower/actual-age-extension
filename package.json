@@ -1,7 +1,7 @@
 {
   "name": "actual-age-extension",
   "version": "1.0.1",
-  "description": "My Chrome Extension",
+  "description": "Extension for displaying your actual age (float number)",
   "license": "MIT",
   "private": true,
   "scripts": {

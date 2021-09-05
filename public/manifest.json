@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
   "name": "Actual Age Tab",
-  "version": "1.0.0",
-  "description": "Displaying actual age in percentage with 9 signs after dot (floating number)",
+  "version": "1.0.1",
+  "description": "Extension for displaying your actual age (float number)",
   "icons": {
     "16": "icons/icon_128.png",
     "32": "icons/icon_128.png",
